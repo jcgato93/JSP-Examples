@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiJARLocking="true" path="/MVC2_CRUD">
+    <Resource name="jdbc/persona" auth="Container" type="javax.sql.DataSource"
+    maxActive="15" maxIdle="3" maxWait="5000"
+    username="Invitado" password="123456789"
+    driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+    url="jdbc:sqlserver://localhost:1433;databaseName=basereserva"
+    >
+    </Resource>
+    
+</Context>
