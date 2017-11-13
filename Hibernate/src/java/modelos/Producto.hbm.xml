@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 12/11/2017 05:59:15 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelos.Producto" table="producto" schema="dbo" catalog="basereserva" optimistic-lock="version">
+        <id name="productoId" type="int">
+            <column name="productoId" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="50" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" />
+        </property>
+        <property name="unidadMedida" type="string">
+            <column name="unidad_medida" length="50" />
+        </property>
+        <property name="precioVenta" type="string">
+            <column name="precio_venta" length="50" />
+        </property>
+        <set name="consumos" table="consumo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="productoId" />
+            </key>
+            <one-to-many class="modelos.Consumo" />
+        </set>
+    </class>
+</hibernate-mapping>

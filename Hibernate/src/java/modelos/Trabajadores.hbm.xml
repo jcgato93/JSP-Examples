@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 12/11/2017 05:59:15 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelos.Trabajadores" table="trabajadores" schema="dbo" catalog="basereserva" optimistic-lock="version">
+        <id name="tabajadoresId" type="int">
+            <column name="tabajadoresId" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="persona" class="modelos.Persona" fetch="select">
+            <column name="personaId" />
+        </many-to-one>
+        <property name="sueldo" type="string">
+            <column name="sueldo" length="50" />
+        </property>
+        <property name="rol" type="string">
+            <column name="rol" length="50" />
+        </property>
+        <property name="login" type="string">
+            <column name="login" length="50" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="50" />
+        </property>
+        <set name="reservas" table="reserva" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="trabajadorId" />
+            </key>
+            <one-to-many class="modelos.Reserva" />
+        </set>
+    </class>
+</hibernate-mapping>

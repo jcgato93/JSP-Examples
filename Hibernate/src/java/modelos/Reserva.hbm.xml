@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 12/11/2017 05:59:15 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelos.Reserva" table="reserva" schema="dbo" catalog="basereserva" optimistic-lock="version">
+        <id name="reservaId" type="int">
+            <column name="reservaId" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="clientes" class="modelos.Clientes" fetch="select">
+            <column name="clienteId" />
+        </many-to-one>
+        <many-to-one name="habitacion" class="modelos.Habitacion" fetch="select">
+            <column name="habitacionId" />
+        </many-to-one>
+        <many-to-one name="trabajadores" class="modelos.Trabajadores" fetch="select">
+            <column name="trabajadorId" />
+        </many-to-one>
+        <property name="tipoReserva" type="string">
+            <column name="tipo_reserva" length="50" />
+        </property>
+        <property name="fechaReserva" type="date">
+            <column name="fecha_reserva" length="10" />
+        </property>
+        <property name="fechaIngreso" type="date">
+            <column name="fecha_ingreso" length="10" />
+        </property>
+        <property name="fechaSalida" type="date">
+            <column name="fecha_salida" length="10" />
+        </property>
+        <property name="costoAlojamiento" type="string">
+            <column name="costo_alojamiento" length="50" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="50" />
+        </property>
+        <set name="consumos" table="consumo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="reservaId" />
+            </key>
+            <one-to-many class="modelos.Consumo" />
+        </set>
+        <set name="pagos" table="pago" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="reservaId" />
+            </key>
+            <one-to-many class="modelos.Pago" />
+        </set>
+    </class>
+</hibernate-mapping>

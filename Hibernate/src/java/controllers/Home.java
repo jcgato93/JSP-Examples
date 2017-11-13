@@ -1,54 +1,26 @@
-package Controllers;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package controllers;
 
-import Metodos.personaMetodos;
-import Models.persona;
+import Metodos.perosonaM;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.List;
-import javax.annotation.Resource;
-import javax.servlet.RequestDispatcher;
+import java.util.*;
+
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.*;
+import modelos.Persona;
 
 /**
  *
  * @author GATO
  */
-@WebServlet(urlPatterns = {"/personaController"})
-public class personaController extends HttpServlet {
+public class Home extends HttpServlet {
 
-    //Definir el DataSource para el pool de Conexiones    
-    @Resource(name="jdbc/persona")//usa en name del source del context.xml
-    private DataSource miPoolCon;
-    
-    private personaMetodos personaMe;
-
-    @Override
-    public void init() throws ServletException {
-        super.init(); //To change body of generated methods, choose Tools | Templates.
-    try{
-      personaMe=new personaMetodos();
-    }catch(Exception ex)
-    {
-      throw  new ServletException(ex);
-    }
-    }
-    
-    
-    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -61,7 +33,11 @@ public class personaController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-
+        perosonaM pM=new perosonaM();
+        ArrayList<Persona> persona=pM.getPersona();
+                
+        request.setAttribute("persona",persona);
+        request.getRequestDispatcher("Home.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -77,24 +53,6 @@ public class personaController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
-        //obtener la lista de personas
-        List<persona> personas;
-        try{
-        personas=personaMe.getPersonas();
-            
-        //agregar lista al request
-        request.setAttribute("persona",personas);
-        
-        //enviar el request a la pagina JSP
-        RequestDispatcher  dispatcher=request.getRequestDispatcher("/ListaPersonas.jsp");
-        
-        dispatcher.forward(request, response);
-        
-        }
-        catch(Exception ex)
-        {}
-        
     }
 
     /**

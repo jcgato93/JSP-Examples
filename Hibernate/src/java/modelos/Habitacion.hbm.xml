@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 12/11/2017 05:59:15 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelos.Habitacion" table="habitacion" schema="dbo" catalog="basereserva" optimistic-lock="version">
+        <id name="habitacionId" type="int">
+            <column name="habitacionId" />
+            <generator class="assigned" />
+        </id>
+        <property name="numero" type="string">
+            <column name="numero" length="50" />
+        </property>
+        <property name="piso" type="string">
+            <column name="piso" length="50" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" />
+        </property>
+        <property name="caracteristicas" type="string">
+            <column name="caracteristicas" />
+        </property>
+        <property name="precioDiario" type="string">
+            <column name="precio_diario" length="50" />
+        </property>
+        <property name="habitacioncol" type="string">
+            <column name="habitacioncol" length="50" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="50" />
+        </property>
+        <property name="tipoHabitacion" type="string">
+            <column name="tipo_habitacion" length="50" />
+        </property>
+        <set name="reservas" table="reserva" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="habitacionId" />
+            </key>
+            <one-to-many class="modelos.Reserva" />
+        </set>
+    </class>
+</hibernate-mapping>
