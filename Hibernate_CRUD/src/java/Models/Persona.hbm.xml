@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/11/2017 12:29:14 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Models.Persona" table="persona" schema="dbo" catalog="basereserva" optimistic-lock="version">
+        <id name="personaId" type="int">
+            <column name="personaId" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombres" type="string">
+            <column name="nombres" length="50" />
+        </property>
+        <property name="apellidos" type="string">
+            <column name="apellidos" length="50" />
+        </property>
+        <property name="tipoDocumento" type="string">
+            <column name="tipo_documento" length="50" />
+        </property>
+        <property name="numDocumento" type="string">
+            <column name="num_documento" length="50" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="50" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="50" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="50" />
+        </property>
+        <set name="trabajadoreses" table="trabajadores" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="personaId" />
+            </key>
+            <one-to-many class="Models.Trabajadores" />
+        </set>
+        <set name="clienteses" table="clientes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="personaId" />
+            </key>
+            <one-to-many class="Models.Clientes" />
+        </set>
+    </class>
+</hibernate-mapping>
